@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+$containers-size: 18rem
+$error-color: red
+
+html
+  background-color: lightgray
+
+body
+  margin: 0
+  padding: 0
+
+.container
+  padding: 1rem
+
+.input-container
+  padding: .5rem
+  display: flex
+  width: $containers-size
+  align-items: center
+  justify-content: space-between
+
+  label
+    margin-right: .5rem
+
+  input
+    padding: .5rem
+
+.btn-containers
+  width: $containers-size
+  text-align: center
+  margin-top: .5rem
+
+  button
+    padding: .25rem
+    margin: 0 .25rem
+    text-transform: uppercase
+
+.error-container
+  p
+    font-weight: bold
+    color: $error-color
+    margin: 0
+    margin-top: 1rem

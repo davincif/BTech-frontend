@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="container">
+  <form [formGroup]="formLogin" (submit)="login()">
+    <div class="input-container">
+      <label>name: </label>
+      <input id="input-login" formControlName="name" type="text" />
+    </div>
+
+    <div class="input-container">
+      <label>password: </label>
+      <input id="input-password" formControlName="password" type="password" />
+    </div>
+
+    <div class="btn-containers">
+      <button type="submit">login</button>
+      <button type="button" (click)="singup()">register</button>
+    </div>
+
+    <div class="error-container" [hidden]="!errmsg">
+      <p>{{errmsg}}</p>
+    </div>
+  </form>
+</div>
