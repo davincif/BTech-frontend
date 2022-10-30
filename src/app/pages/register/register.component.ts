@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,19 +8,20 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthService } from '../../services/auth.service';
-import { LoginReq } from '../../../models/auth';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Subject, takeUntil } from 'rxjs';
 
+import { UserService } from 'src/app/services/user.service';
+import { LoginReq } from 'src/models/auth';
+
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.sass'],
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  public formLogin: FormGroup = new FormGroup({
+export class RegisterComponent implements OnInit, OnDestroy {
+  public formRegister: FormGroup = new FormGroup({
     name: new FormControl(),
+    birthdate: new FormControl(),
     password: new FormControl(),
   });
 
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -45,14 +47,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((params) => {
         if (params['name']) {
-          this.formLogin.controls['name'].setValue(params['name']);
+          this.formRegister.controls['name'].setValue(params['name']);
         }
         if (params['password']) {
-          this.formLogin.controls['password'].setValue(params['name']);
+          this.formRegister.controls['password'].setValue(params['name']);
         }
       });
 
-    this.createFormLogin();
+    this.createFormRegister();
   }
 
   ngOnDestroy() {
@@ -61,58 +63,53 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Logs the user in the system
+   * Signs up the user in the back-end
    */
-  public login() {
+  public register() {
     this.errmsg = '';
-    if (!this.formLogin.valid) {
+    if (!this.formRegister.valid) {
       this.errmsg = 'missing info! please, double check';
       return;
     }
 
-    this.authService
-      .authenticate(
-        this.formLogin.controls['name'].value,
-        this.formLogin.controls['password'].value
+    this.userService
+      .signUp(
+        this.formRegister.controls['name'].value,
+        this.formRegister.controls['birthdate'].value,
+        this.formRegister.controls['password'].value
       )
       .subscribe({
-        next: () => {
-          this.router.navigate(['/']);
+        next: (_) => {
+          this.router.navigate(['login'], {
+            queryParams: {
+              name: this.formRegister.controls['name'].value || undefined,
+              password:
+                this.formRegister.controls['password'].value || undefined,
+            },
+          });
         },
         error: (err: HttpErrorResponse) => {
           // TODO: THERE SHOULD BE AN ERROR TRANSLATION, BUT WE HAVE NO TIME FOR THAT ^^"
           let error: LoginReq | undefined = err.error;
-          console.log('err', err);
 
           this.errmsg = error?.msg || 'sorry, an unkown error happened =/';
         },
       });
   }
 
-  /**
-   * Sign a new user up in the system
-   */
-  public singup() {
-    this.router.navigate(['register'], {
-      queryParams: {
-        name: this.formLogin.controls['name'].value || undefined,
-        password: this.formLogin.controls['password'].value || undefined,
-      },
-    });
-  }
-
-  private createFormLogin() {
-    this.formLogin = this.fb.group({
+  private createFormRegister() {
+    this.formRegister = this.fb.group({
       name: [
-        this.formLogin?.controls['name'].value || '',
+        this.formRegister?.controls['name'].value || '',
         Validators.compose([Validators.required]),
       ],
+      birthdate: ['', Validators.compose([Validators.required])],
       password: [
-        this.formLogin?.controls['password'].value || '',
+        this.formRegister?.controls['password'].value || '',
         Validators.compose([Validators.required]),
       ],
     });
-    this.formLogin.valueChanges
+    this.formRegister.valueChanges
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.errmsg = '';

@@ -1,0 +1,26 @@
+<div class="container">
+  <form [formGroup]="formRegister" (submit)="register()">
+    <div class="input-container">
+      <label>name: </label>
+      <input id="input-login" formControlName="name" type="text" />
+    </div>
+
+    <div class="input-container">
+      <label>birth date: </label>
+      <input id="input-password" formControlName="birthdate" type="date" />
+    </div>
+
+    <div class="input-container">
+      <label>password: </label>
+      <input id="input-password" formControlName="password" type="password" />
+    </div>
+
+    <div class="btn-containers">
+      <button type="submit">register</button>
+    </div>
+
+    <div class="error-container" [hidden]="!errmsg">
+      <p>{{ errmsg }}</p>
+    </div>
+  </form>
+</div>
