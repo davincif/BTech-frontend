@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { ProjectData, ProjectReq } from 'src/models/projects';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,17 @@ import { Observable } from 'rxjs';
 export class ProjectsService {
   constructor(private http: HttpClient) {}
 
-  public create(): Observable<any> {
-    const body = {};
-    return this.http.post('/api/project/create', body);
+  /**
+   * Creates a new project for the logged user with the given name in the backend
+   * @param name Project Name
+   * @returns The Observable with the crated project
+   */
+  public create(name: string): Observable<ProjectData> {
+    const body = { name };
+    return this.http.post<ProjectReq>('/api/project/create', body).pipe(
+      map((res) => {
+        return res.data!;
+      })
+    );
   }
 }
