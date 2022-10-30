@@ -1,0 +1,17 @@
+{
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "*.ts",
+      "options": {
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    }
+  ]
+}
