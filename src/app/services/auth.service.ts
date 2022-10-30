@@ -47,7 +47,7 @@ export class AuthService {
     );
 
     // keep the local storage updated with the user token
-    this.userToken.subscribe((token) => {
+    this.userToken$.subscribe((token) => {
       if (token) {
         this.saveAuthentication();
       } else {
@@ -56,7 +56,7 @@ export class AuthService {
     });
 
     // keep the local storage updated with the user's data
-    this.userData.subscribe((uData) => {
+    this.userData$.subscribe((uData) => {
       if (uData) {
         this.saveUserData();
       } else {
@@ -69,7 +69,7 @@ export class AuthService {
    * Maintain the userToken BehaviorSubject encapsulates and protected against
    * unwanted changes change
    */
-  public get userToken() {
+  public get userToken$() {
     return this._userToken.asObservable();
   }
 
@@ -85,7 +85,7 @@ export class AuthService {
    * Maintain the userData BehaviorSubject encapsulates and protected against
    * unwanted changes change
    */
-  public get userData() {
+  public get userData$() {
     return this._userData.asObservable();
   }
 
@@ -101,7 +101,7 @@ export class AuthService {
    * Weather the user is authorized or not
    */
   public isAuth(): Observable<boolean> {
-    return this.userToken.pipe(map((token) => Boolean(token)));
+    return this.userToken$.pipe(map((token) => Boolean(token)));
   }
 
   /**

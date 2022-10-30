@@ -11,12 +11,14 @@
     </div>
 
     <div class="btn-containers">
-      <button type="submit">login</button>
-      <button type="button" (click)="singup()">register</button>
+      <button type="submit" id="btn-login">login</button>
+      <button type="button" id="btn-login-register" (click)="singup()">
+        register
+      </button>
     </div>
 
     <div class="error-container" [hidden]="!errmsg">
-      <p>{{errmsg}}</p>
+      <p>{{ errmsg }}</p>
     </div>
   </form>
 </div>

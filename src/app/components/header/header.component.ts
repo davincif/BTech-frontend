@@ -8,7 +8,14 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  /**
+   * A mirror of the information about the user present in the auth service
+   */
+  public userData$
+
+  constructor(private authService: AuthService) {
+    this.userData$ = this.authService.userData$
+  }
 
   ngOnInit(): void {}
 

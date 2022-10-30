@@ -1,0 +1,16 @@
+<div class="container">
+  <form [formGroup]="formProject" (submit)="createProject()">
+    <div class="input-container">
+      <label>project name: </label>
+      <input id="input-projname" formControlName="name" type="text" />
+    </div>
+
+    <div class="btn-containers">
+      <button type="submit" id="btn-create-proj">create project</button>
+    </div>
+
+    <div class="error-container" [hidden]="!errmsg">
+      <p>{{ errmsg }}</p>
+    </div>
+  </form>
+</div>

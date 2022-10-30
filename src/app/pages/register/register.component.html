@@ -2,21 +2,25 @@
   <form [formGroup]="formRegister" (submit)="register()">
     <div class="input-container">
       <label>name: </label>
-      <input id="input-login" formControlName="name" type="text" />
+      <input id="input-reg-name" formControlName="name" type="text" />
     </div>
 
     <div class="input-container">
       <label>birth date: </label>
-      <input id="input-password" formControlName="birthdate" type="date" />
+      <input id="input-reg-birth" formControlName="birthdate" type="date" />
     </div>
 
     <div class="input-container">
       <label>password: </label>
-      <input id="input-password" formControlName="password" type="password" />
+      <input
+        id="input-reg-password"
+        formControlName="password"
+        type="password"
+      />
     </div>
 
     <div class="btn-containers">
-      <button type="submit">register</button>
+      <button type="submit" id="btn-register">register</button>
     </div>
 
     <div class="error-container" [hidden]="!errmsg">

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public errmsg: string = '';
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private createFormLogin() {
-    this.formLogin = this.fb.group({
+    this.formLogin = this.formBuilder.group({
       name: [
         this.formLogin?.controls['name'].value || '',
         Validators.compose([Validators.required]),

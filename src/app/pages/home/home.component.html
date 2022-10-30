@@ -1,2 +1,12 @@
 <app-header></app-header>
-<div class="container">CONTENT</div>
+<div class="container">
+  <!-- the user has no project -->
+  <ng-container *ngIf="!projects.length">
+    <app-project-creation></app-project-creation>
+  </ng-container>
+
+  <!-- the user has at least one project -->
+  <ng-container *ngIf="projects.length">
+    <p>SHOW PROJECTS</p>
+  </ng-container>
+</div>
