@@ -1,0 +1,12 @@
+<div class="container-card">
+  <div class="card" *ngFor="let project of projects | keyvalue">
+    <div class="card-header">
+      <p>{{ project.value.name }}</p>
+      <button type="button" class="icon-btn">
+        <img src="../../../assets/trash.svg" />
+      </button>
+    </div>
+
+    <div class="card-section">TASKS...</div>
+  </div>
+</div>

@@ -6,11 +6,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '../../services/auth.service';
 import { LoginReq } from '../../../models/auth';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',

@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProjectCreationComponent } from './components/project-creation/project-creation.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ProjectsComponent } from './pages/projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HeaderComponent,
     RegisterComponent,
     ProjectCreationComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,

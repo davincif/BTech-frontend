@@ -6,18 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
-  /**
-   * All projects of the logged users to be shown
-   */
-  public projects = [];
-
   constructor() {}
 
-  ngOnInit(): void {
-    this.getAllProjects();
-  }
-
-  private getAllProjects() {
-    // code
-  }
+  ngOnInit(): void {}
 }

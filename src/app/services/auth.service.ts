@@ -153,11 +153,19 @@ export class AuthService {
         return;
       }),
       tap((res) => {
-        this._userToken.next('');
-        this._userData.next(undefined);
-        this.router.navigate(['/login']);
+        this.cleanAuthData();
       })
     );
+  }
+
+  /**
+   * Clean all authentication related data, effectvelly loggin the user out of
+   * this web application
+   */
+  public cleanAuthData() {
+    this._userToken.next('');
+    this._userData.next(undefined);
+    this.router.navigate(['/login']);
   }
 
   /**
