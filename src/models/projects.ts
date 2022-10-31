@@ -16,3 +16,5 @@ export interface ProjectCollection {
 export type ProjectCreateReq = StdBackReq<ProjectDataExtended>;
 
 export type ProjectReq = StdBackReq<ProjectCollection>;
+
+export type ProjectDeletionReq = StdBackReq<ProjectData>;

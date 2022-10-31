@@ -6,7 +6,9 @@ import { map, Observable, of } from 'rxjs';
 import {
   ProjectCollection,
   ProjectCreateReq,
+  ProjectData,
   ProjectDataExtended,
+  ProjectDeletionReq,
   ProjectReq,
 } from 'src/models/projects';
 
@@ -40,5 +42,24 @@ export class ProjectsService {
         return res.data || {};
       })
     );
+  }
+
+  /**
+   * Delete the given project in the backend
+   * @param projName Project Name
+   */
+  public del(projName: string): Observable<ProjectData> {
+    const body = { projName };
+    return this.http
+      .request<ProjectDeletionReq>('delete', '/api/project/del', { body })
+      .pipe(
+        map((res) => {
+          if (!res.data) {
+            throw res;
+          }
+
+          return res.data;
+        })
+      );
   }
 }

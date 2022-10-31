@@ -2,7 +2,7 @@
   <div class="card" *ngFor="let project of projects | keyvalue">
     <div class="card-header">
       <p>{{ project.value.name }}</p>
-      <button type="button" class="icon-btn">
+      <button type="button" class="icon-btn" (click)="deleteProject(project.value.name)">
         <img src="../../../assets/trash.svg" />
       </button>
     </div>

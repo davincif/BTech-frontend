@@ -140,7 +140,7 @@ export class AuthService {
 
     // if user is already logged
     if (!this.getUserToken() || !uData) {
-      return of();
+      return of(undefined);
     }
 
     let body = { name: uData.name };

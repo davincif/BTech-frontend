@@ -20,6 +20,21 @@ export class ProjectsComponent implements OnInit {
   }
 
   /**
+   * Delete the given project in the backend and removes it from the screen
+   * @param name Project name
+   */
+  public deleteProject(name: string) {
+    this.projectsService.del(name).subscribe({
+      next: (res) => {
+        delete this.projects[res.name];
+      },
+      error: (_) => {
+        // code
+      },
+    });
+  }
+
+  /**
    * Searchs all projects of the logged user
    */
   private getAllProjects() {
