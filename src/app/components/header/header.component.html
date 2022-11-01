@@ -4,8 +4,24 @@
   </div>
 
   <div class="btn-containers">
-    <a routerLink="/">Go Home</a>
-    <a routerLink="/create-project">Craete Project</a>
-    <button type="button" id="btn-logout" (click)="logout()">logout</button>
+    <a routerLink="/" id="header-link-home" aria-label="Go Home">
+      <img src="../../../assets/home.svg" />
+    </a>
+    <a
+      routerLink="/create-project"
+      id="header-link-create"
+      aria-label="Craete Project"
+    >
+      <img src="../../../assets/list.svg" />
+    </a>
+    <button
+      type="button"
+      id="header-btn-logout"
+      (click)="logout()"
+      class="icon-btn"
+      aria-label="Logout"
+    >
+      <img src="../../../assets/logout.svg" />
+    </button>
   </div>
 </div>
