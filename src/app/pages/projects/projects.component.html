@@ -1,10 +1,44 @@
 <div class="container-card">
   <div class="card" *ngFor="let project of projects | keyvalue">
+
     <div class="card-header">
-      <p>{{ project.value.name }}</p>
-      <button type="button" class="icon-btn" (click)="deleteProject(project.value.name)">
-        <img src="../../../assets/trash.svg" />
-      </button>
+      <!-- Title or editing title -->
+      <input
+        *ngIf="
+          editingProj[project.value.name];
+          else noEditState;
+          let editingProject
+        "
+        id="project-edit-{{ project.value.name }}"
+        type="text"
+        class="edit-project"
+        [(ngModel)]="editingProject.newName"
+        (keyup.enter)="saveEdition(project.value.name)"
+      />
+      <ng-template #noEditState>
+        <p>{{ project.value.name }}</p>
+      </ng-template>
+
+      <!-- Interactions with the Card -->
+      <div>
+        <button type="button" class="icon-btn" (click)="editMe(project.key)">
+          <img
+            *ngIf="!editingProj[project.value.name]"
+            src="../../../assets/edit.svg"
+          />
+          <img
+            *ngIf="editingProj[project.value.name]"
+            src="../../../assets/save.svg"
+          />
+        </button>
+        <button
+          type="button"
+          class="icon-btn"
+          (click)="deleteProject(project.value.name)"
+        >
+          <img src="../../../assets/trash.svg" />
+        </button>
+      </div>
     </div>
 
     <div class="card-section">TASKS...</div>

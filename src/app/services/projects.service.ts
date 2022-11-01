@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import {
   ProjectCollection,
   ProjectCreateReq,
   ProjectData,
   ProjectDataExtended,
-  ProjectDeletionReq,
   ProjectReq,
+  ProjectSingleReq,
 } from 'src/models/projects';
 
 @Injectable({
@@ -51,7 +51,7 @@ export class ProjectsService {
   public del(projName: string): Observable<ProjectData> {
     const body = { projName };
     return this.http
-      .request<ProjectDeletionReq>('delete', '/api/project/del', { body })
+      .request<ProjectSingleReq>('delete', '/api/project/del', { body })
       .pipe(
         map((res) => {
           if (!res.data) {
@@ -61,5 +61,26 @@ export class ProjectsService {
           return res.data;
         })
       );
+  }
+
+  /**
+   * Updates a project, that currently resumes to changing its name
+   * @param oldName The current name of the project
+   * @param newName The new name you wanna give to the project
+   */
+  public changeName(
+    oldName: string,
+    newName: string
+  ): Observable<ProjectData> {
+    const body = { oldName, newName };
+    return this.http.put<ProjectSingleReq>('/api/project/update', body).pipe(
+      map((res) => {
+        if (!res.data) {
+          throw res;
+        }
+
+        return res.data;
+      })
+    );
   }
 }
