@@ -11,6 +11,13 @@ import { StdBackReq } from 'src/models/stdBackReq';
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  /**
+   * Signs Up, with the back-end, a new user in the system
+   * @param name name of the user
+   * @param birth date of birth of the user
+   * @param password password of the of the user
+   * @returns
+   */
   public signUp(
     name: string,
     birth: string,

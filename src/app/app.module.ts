@@ -12,6 +12,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ProjectCreationComponent } from './components/project-creation/project-creation.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProjectsComponent } from './pages/projects/projects.component';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
     RegisterComponent,
     ProjectCreationComponent,
     ProjectsComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

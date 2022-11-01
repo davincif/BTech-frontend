@@ -1,6 +1,5 @@
 <div class="container-card">
   <div class="card" *ngFor="let project of projects | keyvalue">
-
     <div class="card-header">
       <!-- Title or editing title -->
       <input
@@ -9,7 +8,7 @@
           else noEditState;
           let editingProject
         "
-        id="project-edit-{{ project.value.name }}"
+        id="inp-project-edit-{{ project.value.name }}"
         type="text"
         class="edit-project"
         [(ngModel)]="editingProject.newName"
@@ -21,7 +20,12 @@
 
       <!-- Interactions with the Card -->
       <div>
-        <button type="button" class="icon-btn" (click)="editMe(project.key)">
+        <button
+          id="btn-proj-toggle-edit"
+          type="button"
+          class="icon-btn"
+          (click)="editMe(project.key)"
+        >
           <img
             *ngIf="!editingProj[project.value.name]"
             src="../../../assets/edit.svg"
@@ -32,6 +36,7 @@
           />
         </button>
         <button
+          id="btn-proj-delete"
           type="button"
           class="icon-btn"
           (click)="deleteProject(project.value.name)"
@@ -41,6 +46,11 @@
       </div>
     </div>
 
-    <div class="card-section">TASKS...</div>
+    <div class="card-section">
+      <app-task
+        [tasks]="getTasksArray(project.key)"
+        [projName]="project.key"
+      ></app-task>
+    </div>
   </div>
 </div>

@@ -27,7 +27,11 @@ export class ProjectsService {
     const body = { name };
     return this.http.post<ProjectCreateReq>('/api/project/create', body).pipe(
       map((res) => {
-        return res.data!;
+        if (!res.data) {
+          throw res;
+        }
+
+        return res.data;
       })
     );
   }
@@ -68,10 +72,7 @@ export class ProjectsService {
    * @param oldName The current name of the project
    * @param newName The new name you wanna give to the project
    */
-  public changeName(
-    oldName: string,
-    newName: string
-  ): Observable<ProjectData> {
+  public changeName(oldName: string, newName: string): Observable<ProjectData> {
     const body = { oldName, newName };
     return this.http.put<ProjectSingleReq>('/api/project/update', body).pipe(
       map((res) => {

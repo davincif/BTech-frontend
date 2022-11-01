@@ -1,0 +1,45 @@
+<div class="container">
+  <div>
+    <!-- Fresh tasks -->
+    <div *ngIf="freshTasks.length">
+      <h3>To Do</h3>
+      <ul>
+        <li *ngFor="let task of freshTasks">
+          <input type="checkbox" [checked]="false" />
+          <p>{{ task.description }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <hr *ngIf="freshTasks.length && finishedTasks.length" />
+
+    <!-- Finished tasks -->
+    <div *ngIf="finishedTasks.length">
+      <h3>Done</h3>
+      <ul>
+        <li *ngFor="let task of finishedTasks">
+          <input type="checkbox" [checked]="true" />
+          <p>{{ task.description }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="task-footer">
+    <hr />
+    <div class="task-footer-inp-container">
+      <input
+        id="ipnt-task-newtask"
+        type="text"
+        [(ngModel)]="newTaskDescription"
+      />
+      <button
+        id="btn-task-create"
+        type="button"
+        (click)="addTask(newTaskDescription)"
+      >
+        ADD
+      </button>
+    </div>
+  </div>
+</div>

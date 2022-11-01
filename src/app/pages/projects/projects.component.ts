@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProjectsService } from 'src/app/services/projects.service';
-import { ProjectCollection, ProjectData } from 'src/models/projects';
+import { ProjectCollection } from 'src/models/projects';
+import { TaskData } from 'src/models/tasks';
 
 @Component({
   selector: 'app-projects',
@@ -47,10 +48,6 @@ export class ProjectsComponent implements OnInit {
    * @param projName name of the project to be edited
    */
   public editMe(projName: string) {
-    console.log('this.projects', this.projects);
-    console.log('editMe');
-    console.log('projName', projName);
-    console.log('this.editingProj', this.editingProj);
     if (this.editingProj[projName]) {
       // if the user is already editing then, save it
       this.saveEdition(projName);
@@ -70,10 +67,6 @@ export class ProjectsComponent implements OnInit {
       return;
     }
 
-    console.log('saveEdition');
-    console.log('editingProj', this.editingProj);
-    console.log('oldName', oldName);
-    console.log('newName', newName);
     this.projectsService.changeName(oldName, newName).subscribe({
       next: (editedProj) => {
         // now update the edited project
@@ -87,14 +80,25 @@ export class ProjectsComponent implements OnInit {
   }
 
   /**
+   * Transform all the tasks in a particular project in a Array (no side effects)
+   * @param projName The nome of the project from which to get the tasks from
+   * @returns A list of tasks, or an empty one
+   */
+  public getTasksArray(projName: string): TaskData[] {
+    if (!this.projects[projName].tasks) {
+      return [];
+    }
+
+    return Object.values(this.projects[projName].tasks!);
+  }
+
+  /**
    * Searchs all projects of the logged user
    */
   private getAllProjects() {
-    console.log('getAllProjects');
     this.projectsService.getAll().subscribe({
       next: (projs) => {
         this.projects = projs || {};
-        console.log('loaded ', this.projects);
       },
     });
   }
