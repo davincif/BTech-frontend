@@ -5,7 +5,7 @@
       <h3>To Do</h3>
       <ul>
         <li *ngFor="let task of freshTasks">
-          <input type="checkbox" [checked]="false" />
+          <input type="checkbox" [checked]="false" (click)="finishTask(task)"/>
           <p>{{ task.description }}</p>
         </li>
       </ul>
@@ -18,7 +18,7 @@
       <h3>Done</h3>
       <ul>
         <li *ngFor="let task of finishedTasks">
-          <input type="checkbox" [checked]="true" />
+          <input type="checkbox" [checked]="true" disabled/>
           <p>{{ task.description }}</p>
         </li>
       </ul>

@@ -29,4 +29,23 @@ export class TasksService {
       })
     );
   }
+
+  /**
+   * Finishes the task with the back-end
+   * @param projName Project in which to add the task
+   * @param taskID The id of the task to be finished
+   * @returns The task with the updated fields
+   */
+  public finishTask(projName: string, taskID: number,): Observable<TaskData> {
+    const body = { taskID, projName };
+    return this.http.patch<TaskSimpleReq>('/api/task/finish', body).pipe(
+      map((res) => {
+        if (!res.data) {
+          throw res;
+        }
+
+        return res.data;
+      })
+    );
+  }
 }
