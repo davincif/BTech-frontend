@@ -5,7 +5,7 @@
       <h3>To Do</h3>
       <ul>
         <li *ngFor="let task of freshTasks">
-          <input type="checkbox" [checked]="false" (click)="finishTask(task)"/>
+          <input type="checkbox" [checked]="false" (click)="finishTask(task)" />
           <p>{{ task.description }}</p>
         </li>
       </ul>
@@ -17,9 +17,12 @@
     <div *ngIf="finishedTasks.length">
       <h3>Done</h3>
       <ul>
-        <li *ngFor="let task of finishedTasks">
-          <input type="checkbox" [checked]="true" disabled/>
-          <p>{{ task.description }}</p>
+        <li *ngFor="let task of finishedTasks" class="tooltip">
+          <input type="checkbox" [checked]="true" disabled />
+          <div class="tooltip">
+            <p>{{ task.description }}</p>
+            <span class="tooltiptext">{{ task.terminationDate }}</span>
+          </div>
         </li>
       </ul>
     </div>
@@ -32,6 +35,7 @@
         id="ipnt-task-newtask"
         type="text"
         [(ngModel)]="newTaskDescription"
+        (keyup.enter)="addTask(newTaskDescription)"
       />
       <button
         id="btn-task-create"

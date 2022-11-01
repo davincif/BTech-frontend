@@ -92,6 +92,13 @@ export class ProjectsComponent implements OnInit {
     return Object.values(this.projects[projName].tasks!);
   }
 
+  public updateTasks(projName: string, updatedTask: TaskData) {
+    if (!this.projects[projName].tasks) {
+      this.projects[projName].tasks = {};
+    }
+    this.projects[projName].tasks![updatedTask.id] = updatedTask;
+  }
+
   /**
    * Searchs all projects of the logged user
    */

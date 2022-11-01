@@ -50,7 +50,8 @@
       <app-task
         [tasks]="getTasksArray(project.key)"
         [projName]="project.key"
-      ></app-task>
+        (taskChange)="updateTasks(project.key, $event)"
+        ></app-task>
     </div>
   </div>
 </div>
