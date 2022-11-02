@@ -21,7 +21,9 @@
           <input type="checkbox" [checked]="true" disabled />
           <div class="tooltip">
             <p>{{ task.description }}</p>
-            <span class="tooltiptext">{{ task.terminationDate }}</span>
+            <span class="tooltiptext">{{
+              task.terminationDate | date: "yyyy/MM/dd"
+            }}</span>
           </div>
         </li>
       </ul>

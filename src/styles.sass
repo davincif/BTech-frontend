@@ -75,12 +75,12 @@ p
   /* Tooltip text */
   .tooltiptext
     visibility: hidden
-    width: 120px
+    // width: 120px
     background-color: black
     color: #fff
     text-align: center
-    padding: 5px 0
-    border-radius: 6px
+    padding: .5rem
+    border-radius: .5rem
 
     /* Position the tooltip text - see examples below! */
     position: absolute
@@ -90,3 +90,6 @@ p
   &:hover
     .tooltiptext
       visibility: visible
+
+      &:hover
+        visibility: hidden

@@ -51,7 +51,11 @@
         [tasks]="getTasksArray(project.key)"
         [projName]="project.key"
         (taskChange)="updateTasks(project.key, $event)"
-        ></app-task>
+      ></app-task>
+    </div>
+
+    <div class="card-footer">
+      <p>@ {{ project.value.creationDate | date: "yyyy/MM/dd HH:mm:ss" }}</p>
     </div>
   </div>
 </div>
